@@ -1,0 +1,25 @@
+{
+    "name" : "Papeis de parede para Whatsapp (beta)",
+    "description":"Muda o papel de parede do Whatsapp",
+    "version":"1.0",
+    "manifest_version":2,
+    "content_scripts":[
+        {
+            "matches":["https://web.whatsapp.com/*"],
+            "css":["css/style.css"],
+            "js":["script/content.js"]
+        }
+    ],
+    "permissions": [
+        "tabs"
+    ],
+    "browser_action":{
+        "default_popup":"index.html",
+        "default_icon":"hello_extensions.png"
+    },
+    "commands": {
+        "_execute_browser_action": {
+            "description":"Trocar plano de fundo para Whatsapp"
+        }
+    }
+}
