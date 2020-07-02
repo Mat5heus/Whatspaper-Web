@@ -1,0 +1,7 @@
+{
+    "titulo":"WhatsPaper",
+    "pesqTitle": "Paste your image converted in base64",
+    "pesqPlaceholder": "Paste your image base64",
+    "btnTrocar" : "Change",
+    "btnNormal" : "Normal"
+}

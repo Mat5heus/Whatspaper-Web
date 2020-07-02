@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="">
     <head>
         <meta  charset="UTF-8">
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/popupStyle.css">
+        <link rel="stylesheet" href="style/reset.css">
+        <link rel="stylesheet" href="style/popupStyle.css">
     </head>
     <body>
         <div class="container">
-            <div id="containerCabecalho">
-                <h3 id="titulo">Plano de Fundo</h3>
-                <input id = "pesquisa"
+            <div class="container navbar">
+                <h3 id="titulo"></h3>
+                <input id="pesquisa"
                     type="text" 
-                    placeholder="Cole uma imagem Base64" 
-                    title="Cole um imagem convertida em Base64"
+                    placeholder="" 
+                    title=""
                     />
-
-                <button id="trocar">Trocar</button>
-                <button id="normal">Normal</button>
+                <div class="container btn">
+                    <button id="trocar" class="submitBtn"></button>
+                    <button id="normal" class="submitBtn"></button>
+                </div>
             </div>
-            <div id="containerImg"></div>
+            <div class="container galeria"></div>
             <script type="text/javascript" src="script/galeria.js"></script>
+            <script type="text/javascript" src="script/jquery-3.5.1.min.js"></script>
             <script type="text/javascript" src="script/popup.js"></script>
         </div>
     </body>

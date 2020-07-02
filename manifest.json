@@ -1,12 +1,12 @@
 {
     "name" : "Whatspaper Web",
     "description":"Troque o papel de parede do Whatsapp",
-    "version":"1.0",
+    "version":"2.0",
     "manifest_version":2,
     "content_scripts":[
         {
             "matches":["https://web.whatsapp.com/*"],
-            "css":["css/style.css"],
+            "css":["style/style.css"],
             "js":["script/content.js"]
         }
     ],

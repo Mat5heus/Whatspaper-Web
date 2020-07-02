@@ -1,12 +1,26 @@
 (function() {
+
+    function idioma(lang) {
+        $.getJSON("script/dicionarios/"+lang+".json", function(dicionario) {
+            let pesquisa = document.querySelector("#pesquisa");
+            
+            document.querySelector("html").lang = lang;
+            document.querySelector("#titulo").innerHTML = dicionario.titulo;
+            pesquisa.placeholder = dicionario.pesqPlaceholder;
+            pesquisa.title = dicionario.pesqTitle;
+            document.querySelector("#trocar").innerHTML = dicionario.btnTrocar;
+            document.querySelector("#normal").innerHTML = dicionario.btnNormal
+        });
+    }
+    
+    idioma("pt-BR");
+
     document.querySelector("#trocar").addEventListener("click", () => {
         let input = document.querySelector("#pesquisa");
         if (input.value == '') {
             return;
         }
-    
         enviar(input.value);
-    
         input.value = "";
     });
     
