@@ -1,19 +1,26 @@
-body > .container{
-    width: 300px;
+body > div.container{
+    --box-shadowDefault: #6b6b6b;
+    width: 310px;
     height: 270px
 }
-body > div > .container.navbar {
+body > div > div.container.navbar {
     width: 100%;
-    padding-top: 30px;
+    padding-top: 23px;
     padding-bottom: 15px;
-    background-color: lightgreen
+    background-color: lightgreen;
+    box-shadow:var(--box-shadowDefault) 0 2px 3px;
+    display: block;
+    position: relative;
+    z-index: 3
 }
 body > div > div > h3#titulo {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 14pt;
     text-align: center;
     font-weight: bolder;
-    text-shadow:#87b7e7 2px 2px 1px;
+    letter-spacing: 3px;
+    color: #182727;
+    text-shadow:#f7f3f3 3px 3px 2px;
     padding-bottom: 10px
 }
 body > div > div > input#pesquisa {
@@ -23,10 +30,10 @@ body > div > div > input#pesquisa {
     text-align: center;
     margin-bottom: 10px
 }
-body > div > div > .container.btn {
+body > div > div > div.container.btn {
     margin-left: 28%
 }
-body > div > div > div > .submitBtn {
+body > div > div > div > button.submitBtn {
     margin-left: 5px;
     cursor: pointer;
     background-color: #326fe0;
@@ -36,18 +43,63 @@ body > div > div > div > .submitBtn {
     font-weight: bold;
     border: 0px
 }
-body > div > .container.galeria {
+/*** Fim do container cabecalho ***/
+body > div > div.container.menu {
+    position: absolute;
+    z-index: 1;
+    width: 98%;
+    margin-left: 1%;
+    height: 0px;
+    background-color: #e0e6f0;
+    box-shadow: var(--box-shadowDefault) 2px 2px 3px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: height 0.5s ease;
+}
+body > div > div > img.icons {
+    max-width: 25%;
+    max-height: 25%;
+    width: auto;
+    height: auto;
+}
+body > div > div.container.seta {
+    position: absolute;
+    z-index: 2;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 0px;
+    margin-left: 43.5%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #111111;
+    cursor: pointer;
+    transition: all .5s ease
+}
+body > div > div > div#seta {
+    width: 0;
+    height: 0;
+    margin-top: 5px;
+    border: 10px solid transparent;
+    border-top-color:#eeeaea;
+    border-bottom: 4px solid transparent;
+    transition: all .7s ease;
+}
+/*** Fim da Seta ***/
+body > div > div.container.galeria {
+    z-index: 0;
+    position: relative;
     width: 100%;
     height: 100%;
     padding-top: 10px;
+    overflow-y: auto;
     background-color: #87cefa
 }
-body > div > div > .imagens {
+body > div > div > img.imagens {
     margin-left: 7px;
     margin-bottom: 7px;
     width: 90px;
     height: 70px;
-    box-shadow: #778899 2px 2px 2px;
+    box-shadow: var(--box-shadowDefault) 2px 2px 2px;
     float: left;
     cursor: pointer
 }
