@@ -31,7 +31,7 @@ body > div > div > input#pesquisa {
     margin-bottom: 10px
 }
 body > div > div > div.container.btn {
-    margin-left: 28%
+    text-align: center;
 }
 body > div > div > div > button.submitBtn {
     margin-left: 5px;
@@ -54,13 +54,15 @@ body > div > div.container.menu {
     box-shadow: var(--box-shadowDefault) 2px 2px 3px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    transition: height 0.5s ease;
+    transition: height .5s ease
 }
 body > div > div > img.icons {
-    max-width: 25%;
-    max-height: 25%;
+    max-width: 40%;
+    max-height: 70%;
     width: auto;
     height: auto;
+    margin-left: 8.5%;
+    cursor: pointer
 }
 body > div > div.container.seta {
     position: absolute;

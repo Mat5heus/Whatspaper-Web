@@ -1,33 +1,49 @@
 (function() {
 
-    function idioma(lang) {
-        $.getJSON("script/dicionarios/"+lang+".json", function(dicionario) {
-            let pesquisa = document.querySelector("#pesquisa");
-            
-            document.querySelector("html").lang = lang;
-            document.querySelector("#titulo").innerHTML = dicionario.titulo;
-            pesquisa.placeholder = dicionario.pesqPlaceholder;
-            pesquisa.title = dicionario.pesqTitle;
-            document.querySelector("#trocar").innerHTML = dicionario.btnTrocar;
-            document.querySelector("#normal").innerHTML = dicionario.btnNormal
-        });
+    function idiomaHome(dicionario) {
+        let pesquisa = document.querySelector("#pesquisa");
+        document.querySelector("html").lang = dicionario.lang;
+        document.querySelector("#titulo").innerHTML = dicionario.titulo;
+        pesquisa.placeholder = dicionario.pesqPlaceholder;
+        pesquisa.title = dicionario.pesqTitle;
+        document.querySelector("#trocar").innerHTML = dicionario.btnTrocar;
+        document.querySelector("#normal").innerHTML = dicionario.btnNormal
+    }
+    function idiomaMenu(dicionario) {
+        let icons = document.getElementsByClassName("icons");
+        if (icons) {
+            for(let nome in dicionario.icons) {
+                icons[nome].title = dicionario.icons[nome];
+            }
+        }
+    }
+
+    function idioma(lang, callback) {
+        $.getJSON("dicionarios/"+lang.idioma+".json", callback)
+    }
+
+    function preferencias(callbackInicial, callbackFinal) {
+        $.getJSON("user/preferences.json", (preferencia) => { 
+            callbackInicial(preferencia, callbackFinal)
+        })
     }
     
-    idioma("pt-BR");
+    preferencias(idioma,idiomaHome);
 
     document.querySelector("div.container.seta").addEventListener("click", function(){
-        const DIST = "70px";
+        const QUANTICONS = 4;
         let setaCont = document.querySelector("div.container.seta");
         let menuCont = document.querySelector("div.container.menu");
         let seta = document.querySelector("#seta");
-        if(setaCont.style.marginTop != DIST) {
-            setaCont.style.marginTop = DIST;
+        if(setaCont.style.marginTop != "80px") {
+            setaCont.style.marginTop = "80px";
             setaCont.style.paddingBottom = "5px";
             seta.style.borderBottom = "10px solid #eeeaea";
             seta.style.borderTop = "1px solid transparent";
-            menuCont.style.height = DIST;
-            menuCont.style.paddingTop = "10px";
-            preencherGaleria(4,"icons", "png", "icons","div.container.menu");
+            menuCont.style.height = "60px";
+            menuCont.style.paddingTop = "20px";
+            preencherGaleria(QUANTICONS,"icons", "png", "icons","div.container.menu");
+            preferencias(idioma,idiomaMenu);
         } else {
             setaCont.style.marginTop = "0px";
             seta.style.borderTop = "10px solid #eeeaea";
@@ -38,7 +54,6 @@
             menuCont.innerHTML = '';
             menuCont.style.paddingTop = "0px"
         }
-            
     });
 
     document.querySelector("#trocar").addEventListener("click", () => {
@@ -60,11 +75,14 @@
         }
     });
     
-    function preencherGaleria(quant, endereco, tipo, ident, query) {
+    function preencherGaleria(quant, endereco, tipo, ident, query, title = false) {
         for (let i = 0; i < quant; i++) {
             let img = document.createElement("IMG");
             img.setAttribute('id',i);
             img.setAttribute('class',ident);
+            if (title) {
+                img.setAttribute('title', title[i]);
+            }
             img.setAttribute('src', endereco+"/"+i+"."+tipo);
             document.querySelector(query).appendChild(img);
         }
@@ -72,7 +90,7 @@
     
     preencherGaleria(imagens.item.length, "miniaturas", "jpg", "imagens","div.container.galeria");
     
-    function enviar(base64) {
+    function enviar(texto) {
         let parametros = {
             active: true,
             url: "https://web.whatsapp.com/*",
@@ -83,7 +101,7 @@
     
         function pegarAba(aba) {
             let mensagem = {
-                imagem: base64
+                imagem: texto
             }
             try {
                 chrome.tabs.sendMessage(aba[0].id, mensagem);

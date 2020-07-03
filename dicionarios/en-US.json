@@ -1,0 +1,14 @@
+{
+    "lang":"en-US",
+    "titulo":"WhatsPaper",
+    "pesqTitle": "Paste your image converted in base64",
+    "pesqPlaceholder": "Paste your base64 image here",
+    "btnTrocar" : "Change",
+    "btnNormal" : "Normal",
+    "icons":[
+        "Settings",
+        "History",
+        "How to use",
+        "About"
+    ]
+}

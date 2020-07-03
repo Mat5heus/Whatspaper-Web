@@ -1,7 +1,14 @@
 {
+    "lang":"pt-BR",
     "titulo":"WhatsPaper",
     "pesqTitle": "Cole a sua imagem convertida em base64",
     "pesqPlaceholder": "Cole a sua imagem em base64",
     "btnTrocar" : "Trocar",
-    "btnNormal" : "Normal"
+    "btnNormal" : "Normal",
+    "icons" : [
+        "configuração",
+        "Histórico",
+        "Como usar",
+        "sobre"
+    ]
 }
