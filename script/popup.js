@@ -18,7 +18,7 @@
         }
     }
 
-    function idioma(lang, callback) {
+    function dicionario(lang, callback) {
         $.getJSON("dicionarios/"+lang.idioma+".json", callback)
     }
 
@@ -28,7 +28,7 @@
         })
     }
     
-    preferencias(idioma,idiomaHome);
+    preferencias(dicionario,idiomaHome);
 
     function opcoesDoMenu(event) {
         if(event.target.src) {
@@ -63,7 +63,7 @@
             menuCont.addEventListener("click", opcoesDoMenu, false);
 
             preencherGaleria(QUANTICONS,"icons", "png", "icons","div.container.menu");
-            preferencias(idioma,idiomaMenu)
+            preferencias(dicionario,idiomaMenu)
         } else {
             setaCont.style.marginTop = "0px";
             setaCont.style.paddingBottom = "0px";
