@@ -30,31 +30,56 @@
     
     preferencias(idioma,idiomaHome);
 
-    document.querySelector("div.container.seta").addEventListener("click", function(){
+    function opcoesDoMenu(event) {
+        if(event.target.src) {
+            menuDeslizante();
+            let galeria = document.querySelector("div.container.galeria");
+            removerImagens("imagens")
+        }
+    }
+
+    function removerImagens(ident) {
+        let imagem = document.getElementsByClassName(ident);
+        for(let img in imagem) {
+            imagem[img].style.display = "none"
+        }
+    }
+
+    function menuDeslizante() {
         const QUANTICONS = 4;
         let setaCont = document.querySelector("div.container.seta");
         let menuCont = document.querySelector("div.container.menu");
         let seta = document.querySelector("#seta");
+
         if(setaCont.style.marginTop != "80px") {
             setaCont.style.marginTop = "80px";
             setaCont.style.paddingBottom = "5px";
+
             seta.style.borderBottom = "10px solid #eeeaea";
             seta.style.borderTop = "1px solid transparent";
+
             menuCont.style.height = "60px";
             menuCont.style.paddingTop = "20px";
+            menuCont.addEventListener("click", opcoesDoMenu, false);
+
             preencherGaleria(QUANTICONS,"icons", "png", "icons","div.container.menu");
-            preferencias(idioma,idiomaMenu);
+            preferencias(idioma,idiomaMenu)
         } else {
             setaCont.style.marginTop = "0px";
-            seta.style.borderTop = "10px solid #eeeaea";
             setaCont.style.paddingBottom = "0px";
+
+            seta.style.borderTop = "10px solid #eeeaea";
             seta.style.marginTop = "5px";
             seta.style.borderBottom = "4px solid transparent";
+
+            menuCont.removeEventListener("click", opcoesDoMenu, false)
             menuCont.style.height = "0px";
             menuCont.innerHTML = '';
-            menuCont.style.paddingTop = "0px"
+            menuCont.style.paddingTop = "0px";   
         }
-    });
+    }
+
+    document.querySelector("div.container.seta").addEventListener("click", menuDeslizante, false);
 
     document.querySelector("#trocar").addEventListener("click", () => {
         let input = document.querySelector("#pesquisa");
@@ -67,7 +92,7 @@
     
     document.querySelector("#normal").addEventListener("click", () => {
         enviar("reset");
-    });
+    },false);
 
     document.querySelector("div.container.galeria").addEventListener("click", function(event) {
         if(event.target.src) {

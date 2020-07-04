@@ -6,9 +6,9 @@
     "btnTrocar" : "Trocar",
     "btnNormal" : "Normal",
     "icons" : [
-        "configuração",
+        "Configuração",
         "Histórico",
         "Como usar",
-        "sobre"
+        "Sobre"
     ]
 }
