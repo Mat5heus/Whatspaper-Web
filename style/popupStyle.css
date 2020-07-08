@@ -1,7 +1,16 @@
 body > div.container{
     --box-shadowDefault: #6b6b6b;
+    --transitionDefault: all 0.5s ease;
     width: 310px;
     height: 270px
+}
+body > div > div.container.opcoes {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 0;
+    background-color: #eeeaea;
+    transition: all 0.8s ease 0.3s;
 }
 body > div > div.container.navbar {
     width: 100%;
@@ -75,7 +84,7 @@ body > div > div.container.seta {
     border-bottom-right-radius: 5px;
     background-color: #111111;
     cursor: pointer;
-    transition: all .5s ease
+    transition: var(--transitionDefault)
 }
 body > div > div > div#seta {
     width: 0;
@@ -84,7 +93,7 @@ body > div > div > div#seta {
     border: 10px solid transparent;
     border-top-color:#eeeaea;
     border-bottom: 4px solid transparent;
-    transition: all .7s ease;
+    transition: var(--transitionDefault)
 }
 /*** Fim da Seta ***/
 body > div > div.container.galeria {
@@ -95,7 +104,6 @@ body > div > div.container.galeria {
     padding-top: 10px;
     overflow-y: auto;
     background-color: #87cefa;
-    transition: all 1.0s ease;
 }
 body > div > div > img.imagens {
     margin-left: 7px;

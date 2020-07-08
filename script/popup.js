@@ -1,4 +1,5 @@
 (function() {
+    const QUANT_MENU_ICONS = 4;
 
     function idiomaHome(dicionario) {
         let pesquisa = document.querySelector("#pesquisa");
@@ -33,12 +34,29 @@
     function opcoesDoMenu(event) {
         if(event.target.src) {
             menuDeslizante();
-            let galeria = document.querySelector("div.container.galeria");
-            removerImagens("imagens")
+            let opcoes = document.querySelector("div.container.opcoes");
+            let object = document.createElement("object");
+
+            opcoes.style.width = "100%";
+            opcoes.style.height = "100%";
+            
+            if(event.target.id == "0")
+                object.setAttribute("data","conf.html")
+            else if(event.target.id == "1") 
+                object.setAttribute("data","historico.html")
+            else if(event.target.id == "2")
+                object.setAttribute("data","como-usar.html")
+            else
+                object.setAttribute("data","sobre.html")
+                
+            object.setAttribute("width","100%");
+            object.setAttribute("height","100%");
+
+            opcoes.appendChild(object)
         }
     }
 
-    function removerImagens(ident) {
+    function esconderElementos(ident) {
         let imagem = document.getElementsByClassName(ident);
         for(let img in imagem) {
             imagem[img].style.display = "none"
@@ -46,7 +64,6 @@
     }
 
     function menuDeslizante() {
-        const QUANTICONS = 4;
         let setaCont = document.querySelector("div.container.seta");
         let menuCont = document.querySelector("div.container.menu");
         let seta = document.querySelector("#seta");
@@ -61,8 +78,9 @@
             menuCont.style.height = "60px";
             menuCont.style.paddingTop = "20px";
             menuCont.addEventListener("click", opcoesDoMenu, false);
+            menuCont.addEventListener("mouseleave", menuDeslizante, false);
 
-            preencherGaleria(QUANTICONS,"icons", "png", "icons","div.container.menu");
+            adicionarImagens(QUANT_MENU_ICONS,"icons", "png", "icons","div.container.menu");
             preferencias(dicionario,idiomaMenu)
         } else {
             setaCont.style.marginTop = "0px";
@@ -72,12 +90,14 @@
             seta.style.marginTop = "5px";
             seta.style.borderBottom = "4px solid transparent";
 
-            menuCont.removeEventListener("click", opcoesDoMenu, false)
             menuCont.style.height = "0px";
             menuCont.innerHTML = '';
-            menuCont.style.paddingTop = "0px";   
+            menuCont.style.paddingTop = "0px";
+            menuCont.removeEventListener("mouseleave", menuDeslizante, false);
+            menuCont.removeEventListener("click", opcoesDoMenu, false); 
         }
     }
+    document.querySelector("div.container.menu").addEventListener("mouseleave", menuDeslizante, false);
 
     document.querySelector("div.container.seta").addEventListener("click", menuDeslizante, false);
 
@@ -100,20 +120,20 @@
         }
     });
     
-    function preencherGaleria(quant, endereco, tipo, ident, query, title = false) {
+    function adicionarImagens(quant, endereco, tipo, ident, query, title = false) {
         for (let i = 0; i < quant; i++) {
             let img = document.createElement("IMG");
+            if (title)
+                img.setAttribute('title', title[i])
             img.setAttribute('id',i);
             img.setAttribute('class',ident);
-            if (title) {
-                img.setAttribute('title', title[i]);
-            }
             img.setAttribute('src', endereco+"/"+i+"."+tipo);
-            document.querySelector(query).appendChild(img);
+
+            document.querySelector(query).appendChild(img)
         }
     };
     
-    preencherGaleria(imagens.item.length, "miniaturas", "jpg", "imagens","div.container.galeria");
+    adicionarImagens(imagens.item.length, "miniaturas", "jpg", "imagens","div.container.galeria");
     
     function enviar(texto) {
         let parametros = {
