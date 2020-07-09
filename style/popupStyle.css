@@ -1,5 +1,5 @@
 body > div.container{
-    --box-shadowDefault: #6b6b6b;
+    --box-shadowDefaultColor: #6b6b6b;
     --transitionDefault: all 0.5s ease;
     width: 310px;
     height: 270px
@@ -7,8 +7,9 @@ body > div.container{
 body > div > div.container.opcoes {
     position: absolute;
     z-index: 5;
-    width: 100%;
-    height: 0;
+    width: 0;
+    height: 100%;
+    margin-left: 50%;
     background-color: #eeeaea;
     transition: all 0.8s ease 0.3s;
 }
@@ -17,7 +18,7 @@ body > div > div.container.navbar {
     padding-top: 23px;
     padding-bottom: 15px;
     background-color: lightgreen;
-    box-shadow:var(--box-shadowDefault) 0 2px 3px;
+    box-shadow:var(--box-shadowDefaultColor) 0 2px 3px;
     display: block;
     position: relative;
     z-index: 3
@@ -60,7 +61,7 @@ body > div > div.container.menu {
     margin-left: 1%;
     height: 0px;
     background-color: #e0e6f0;
-    box-shadow: var(--box-shadowDefault) 2px 2px 3px;
+    box-shadow: var(--box-shadowDefaultColor) 2px 2px 3px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     transition: height .5s ease
@@ -110,7 +111,7 @@ body > div > div > img.imagens {
     margin-bottom: 7px;
     width: 90px;
     height: 70px;
-    box-shadow: var(--box-shadowDefault) 2px 2px 2px;
+    box-shadow: var(--box-shadowDefaultColor) 2px 2px 2px;
     float: left;
     transition: all 1s ease;
     cursor: pointer

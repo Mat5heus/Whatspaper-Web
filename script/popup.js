@@ -38,8 +38,9 @@
             let object = document.createElement("object");
 
             opcoes.style.width = "100%";
-            opcoes.style.height = "100%";
-            
+            opcoes.style.marginLeft = "0";
+
+            object.setAttribute("type","text/html");
             if(event.target.id == "0")
                 object.setAttribute("data","conf.html")
             else if(event.target.id == "1") 
@@ -48,7 +49,7 @@
                 object.setAttribute("data","como-usar.html")
             else
                 object.setAttribute("data","sobre.html")
-                
+
             object.setAttribute("width","100%");
             object.setAttribute("height","100%");
 
@@ -90,8 +91,8 @@
             seta.style.marginTop = "5px";
             seta.style.borderBottom = "4px solid transparent";
 
-            menuCont.style.height = "0px";
             menuCont.innerHTML = '';
+            menuCont.style.height = "0px";
             menuCont.style.paddingTop = "0px";
             menuCont.removeEventListener("mouseleave", menuDeslizante, false);
             menuCont.removeEventListener("click", opcoesDoMenu, false); 
@@ -142,17 +143,15 @@
             currentWindow: true
         }
         
-        chrome.tabs.query(parametros,pegarAba);
-    
-        function pegarAba(aba) {
+        chrome.tabs.query(parametros, (aba) => {
             let mensagem = {
                 imagem: texto
             }
             try {
-                chrome.tabs.sendMessage(aba[0].id, mensagem);
+                chrome.tabs.sendMessage(aba[0].id, mensagem)
             } catch(e) {
-                console.log("Nao foi possivel encontrar aba whatsapp: "+e);
+                console.log("Nao foi possivel encontrar aba whatsapp: "+e)
             } 
-        }
+        });
     }
 })();
