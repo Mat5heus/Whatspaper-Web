@@ -41,6 +41,8 @@
             opcoes.style.marginLeft = "0";
 
             object.setAttribute("type","text/html");
+            object.setAttribute("width","100%");
+            object.setAttribute("height","100%");
             if(event.target.id == "0")
                 object.setAttribute("data","conf.html")
             else if(event.target.id == "1") 
@@ -49,9 +51,6 @@
                 object.setAttribute("data","como-usar.html")
             else
                 object.setAttribute("data","sobre.html")
-
-            object.setAttribute("width","100%");
-            object.setAttribute("height","100%");
 
             opcoes.appendChild(object)
         }

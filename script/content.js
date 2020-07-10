@@ -4,47 +4,51 @@
 
 (function() { 
 
-    function pegarBg() {
-        let tempo = false; // 100 ms
+    function aguardarBG() {
         const existo = setInterval(() => {
-            let bg = document.querySelector("._2WG1s");
-            let desenhos = document.querySelector("._27lSL");
-            if (bg && desenhos) {
+            let background = pegarBG();
+            if (background.cor && background.desenhos) {
                 clearInterval(existo);
-                trocarBg(bg,restaurarJson('whatsappBackground').imagem);
-                pegarMenu()
+                trocarBg()
             }
-        }, tempo)
+        }, false);
     }
 
-    function pegarMenu() {
-        let tempo = 2000; // 2 segs
+    function pegarBG() { 
+        let background = {
+            cor : document.querySelector("._2WG1s"),
+            desenhos : document.querySelector("._27lSL")
+        }
+        return background;
+    }
+
+    function menuListener(menu) {
+        menu.addEventListener("click",aguardarBG, false)
+    }
+
+    //***Funcao a ser melhorada***//
+    function menu() {
         const intervalo = setInterval(() => {
-           let menu = document.querySelector(".-GlrD");
+           let menu = document.querySelector(".-GlrD"); //Não pode ser constante
             if(menu) {
                 clearInterval(intervalo);
-                try {
-                    menu.addEventListener("click",pegarBg)
-                } catch(e) {
-                    console.log("Menu nao encontrado: "+e)
-                } 
+                menuListener(menu)
             }
-        }, tempo)
+        }, 2000) // 2 seg
     }
 
-    pegarMenu();
+    menu();
 
-    function trocarBg(bg,url) {
+    function trocarBg(url = restaurarJson('whatsappBackground'), background = pegarBG()) {
         try {
-            let desenhos = document.querySelector("._27lSL");
             if(url) {
-                bg.style.background = "black url(\""+url+"\") no-repeat";
-                bg.style.backgroundSize="cover";
-                desenhos.hidden = true
-            } else if (url == "") {
-                bg.style.background = url;
-                bg.style.backgroundSize= url;
-                desenhos.hidden = false
+                background.cor.style.background = "black url(\""+url.imagem+"\") no-repeat";
+                background.cor.style.backgroundSize = "cover";
+                background.desenhos.hidden = true
+            } else {
+                background.cor.style.background = '';
+                background.cor.style.backgroundSize = '';
+                background.desenhos.hidden = false
             }
         } catch(e) {
             console.log("Erro ao alterar plano de fundo: "+e)
@@ -55,12 +59,12 @@
 
     function atualizar(mensagem, mandatario, enviarResposta) {
         if(mensagem.imagem == "reset") {
-            mensagem.imagem = "";
+            mensagem.imagem = false;callback
             salvarJson('whatsappBackground', mensagem);
-            trocarBg(document.querySelector("._2WG1s"),mensagem.imagem)
+            trocarBg(mensagem)
         } else {
             salvarJson('whatsappBackground', mensagem);
-            trocarBg(document.querySelector("._2WG1s"),mensagem.imagem)
+            trocarBg(mensagem)
         }
     }
 
