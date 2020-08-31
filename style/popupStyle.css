@@ -66,6 +66,10 @@ body > div > div.container.menu {
     border-bottom-right-radius: 20px;
     transition: height .5s ease
 }
+body > div > div > button.voltar {
+    transition: all 2s ease 0.5s;
+}
+
 body > div > div > img.icons {
     max-width: 40%;
     max-height: 70%;

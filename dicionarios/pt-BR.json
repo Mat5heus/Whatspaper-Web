@@ -10,5 +10,12 @@
         "Histórico",
         "Como usar",
         "Sobre"
-    ]
+    ],
+    "btnVoltar": "voltar",
+    "configuracoes" : {
+            "titulo": "Configurações",
+            "labelIdioma" : "Idioma: ",
+            "apagarTitulo": "Histórico: ",
+            "resetButton": "Apagar Tudo"
+        }
 }

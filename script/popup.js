@@ -1,4 +1,4 @@
-(function() {
+
     const QUANT_MENU_ICONS = 4;
 
     function idiomaHome(dicionario) {
@@ -18,31 +18,26 @@
             }
         }
     }
-
-    function dicionario(lang, callback) {
-        $.getJSON("dicionarios/"+lang.idioma+".json", callback)
+    function btnVoltar(dicionario) {
+        let voltar = document.querySelector("button.voltar");
+        voltar.innerHTML = dicionario.btnVoltar;
     }
 
-    function preferencias(callbackInicial, callbackFinal) {
-        $.getJSON("user/preferences.json", (preferencia) => { 
-            callbackInicial(preferencia, callbackFinal)
-        })
-    }
-    
     preferencias(dicionario,idiomaHome);
 
     function opcoesDoMenu(event) {
         if(event.target.src) {
+            let container = document.querySelector("div.container.opcoes");
             menuDeslizante();
-            let opcoes = document.querySelector("div.container.opcoes");
             let object = document.createElement("object");
+            let voltar = document.createElement("button");
 
-            opcoes.style.width = "100%";
-            opcoes.style.marginLeft = "0";
+            container.style.width = "100%";
+            container.style.marginLeft = "0";
 
             object.setAttribute("type","text/html");
             object.setAttribute("width","100%");
-            object.setAttribute("height","100%");
+            object.setAttribute("height","80%");
             if(event.target.id == "0")
                 object.setAttribute("data","conf.html")
             else if(event.target.id == "1") 
@@ -52,7 +47,23 @@
             else
                 object.setAttribute("data","sobre.html")
 
-            opcoes.appendChild(object)
+            container.appendChild(object);
+
+            voltar.setAttribute("class","voltar");
+            voltar.style.marginLeft = "40%";
+
+            setTimeout(() => {
+                container.appendChild(voltar);
+                preferencias(dicionario, btnVoltar);
+                document.querySelector("button.voltar").addEventListener("click",() => {
+                    preferencias(dicionario,idiomaHome);
+                    voltar.remove();
+                    object.remove();
+                    container.style.width = "0";
+                    container.style.marginLeft = "50%";
+                },false);
+            },1000);
+            
         }
     }
 
@@ -153,4 +164,3 @@
             } 
         });
     }
-})();
