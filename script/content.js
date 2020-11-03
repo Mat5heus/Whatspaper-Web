@@ -1,13 +1,16 @@
-// _27lSL - desenhos do background 
-// _2WG1s - cor do background
+// _27lSL - desenhos do background  -- Class alterada desde 28/10/2020
+// _2WG1s - cor do background -- Class não encontrada
 // -GlrD _2xoTX - menu de conversas
+
+const menuClass = ".-GlrD";
+const corClass = "._2-aNW";
 
 (function() { 
 
     function aguardarBG() {
         const existo = setInterval(() => {
             let background = pegarBG();
-            if (background.cor && background.desenhos) {
+            if (background.cor) { //&& background.desenhos) {
                 clearInterval(existo);
                 trocarBg()
             }
@@ -16,8 +19,8 @@
 
     function pegarBG() { 
         let background = {
-            cor : document.querySelector("._2WG1s"),
-            desenhos : document.querySelector("._27lSL")
+            cor : document.querySelector(corClass)
+            //desenhos : document.querySelector("._27lSL")  
         }
         return background;
     }
@@ -29,7 +32,7 @@
     //***Funcao a ser melhorada***//
     function menu() {
         const intervalo = setInterval(() => {
-           let menu = document.querySelector(".-GlrD"); //Não pode ser constante
+           let menu = document.querySelector(menuClass); //Não pode ser constante
             if(menu) {
                 clearInterval(intervalo);
                 menuListener(menu)
@@ -41,14 +44,14 @@
 
     function trocarBg(url = restaurarJson('whatsappBackground'), background = pegarBG()) {
         try {
-            if(url) {
+            if(url.imagem) { //Da false caso o usuario click em reset (*.imagem necessario)
                 background.cor.style.background = "black url(\""+url.imagem+"\") no-repeat";
                 background.cor.style.backgroundSize = "cover";
-                background.desenhos.hidden = true
+                //background.desenhos.hidden = true  Desativada
             } else {
                 background.cor.style.background = '';
                 background.cor.style.backgroundSize = '';
-                background.desenhos.hidden = false
+                //background.desenhos.hidden = false  Desativada
             }
         } catch(e) {
             console.log("Erro ao alterar plano de fundo: "+e)
@@ -59,7 +62,7 @@
 
     function atualizar(mensagem, mandatario, enviarResposta) {
         if(mensagem.imagem == "reset") {
-            mensagem.imagem = false;callback
+            mensagem.imagem = false;
             salvarJson('whatsappBackground', mensagem);
             trocarBg(mensagem)
         } else {
